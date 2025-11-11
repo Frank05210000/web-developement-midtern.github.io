@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Creative Challenge - My Website</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <button class="nav-toggle" type="button" aria-label="切換主選單" aria-expanded="false" aria-controls="primary-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="primary-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="showcase.html">Showcase</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="canvas.html" class="active">Canvas</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Canvas Creative Challenge (Bonus)</h1>
+
+    <section class="canvas-section">
+      <div class="canvas-copy">
+        <h2 class="canvas-heading">夜光下的北科紅樓</h2>
+        <p class="canvas-description">這個作品以 Canvas 繪製，呈現出漸層的夜空、北科紅樓的主體輪廓與點點星光。創作靈感來自作者在準備期中專案時的經驗——深夜離開自習室時，抬頭望見紅樓在夜色中的剪影，感到格外難忘，因此決定將那一幕畫下。</p>
+        <p class="canvas-description">This piece is painted with the Canvas API to recreate the gradient night sky, the silhouette of NTUT’s Red House, and the scattered stars overhead. The inspiration comes from late-night study sessions—walking out of the study room and seeing the Red House glowing against the dark, a moment that felt worth keeping.</p>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="dreamCanvas" width="640" height="400" aria-label="Dream space canvas artwork"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('dreamCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      function drawBackground() {
+        const gradient = ctx.createLinearGradient(0, 0, 0, h);
+        gradient.addColorStop(0, '#12154b');
+        gradient.addColorStop(0.5, '#1b1e5e');
+        gradient.addColorStop(1, '#2a3b6c');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      function drawStars() {
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        for (let i = 0; i < 35; i++) {
+          const x = Math.random() * w;
+          const y = Math.random() * (h * 0.45);
+          const radius = Math.random() * 1.8 + 0.4;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function drawMoon() {
+        const moonX = w * 0.82;
+        const moonY = h * 0.18;
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255, 247, 196, 0.95)';
+        ctx.arc(moonX, moonY, 28, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(18, 21, 75, 0.6)';
+        ctx.arc(moonX + 8, moonY - 4, 28, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawBuilding() {
+        const baseWidth = 240;
+        const baseHeight = 220;
+        const baseX = (w - baseWidth) / 2;
+        const baseY = h - baseHeight - 60;
+
+        // building
+        ctx.fillStyle = '#c74e4c';
+        ctx.fillRect(baseX, baseY, baseWidth, baseHeight);
+
+        // foundation
+        ctx.fillStyle = '#7c7c7c';
+        ctx.fillRect(baseX, baseY + baseHeight - 20, baseWidth, 20);
+
+        // roof
+        ctx.beginPath();
+        ctx.moveTo(baseX - 20, baseY);
+        ctx.lineTo(baseX + baseWidth / 2, baseY - 70);
+        ctx.lineTo(baseX + baseWidth + 20, baseY);
+        ctx.closePath();
+        ctx.fillStyle = '#5e5e68';
+        ctx.fill();
+
+        // windows
+        const windowWidth = 40;
+        const windowHeight = 70;
+        const columns = 3;
+        const spacingX = 30;
+        const spacingY = 20;
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+
+        for (let col = 0; col < columns; col++) {
+          const x = baseX + 30 + col * (windowWidth + spacingX);
+          for (let row = 0; row < 2; row++) {
+            const y = baseY + 30 + row * (windowHeight + spacingY);
+            ctx.fillRect(x, y, windowWidth, windowHeight);
+            ctx.strokeRect(x, y, windowWidth, windowHeight);
+            ctx.beginPath();
+            ctx.moveTo(x + windowWidth / 2, y);
+            ctx.lineTo(x + windowWidth / 2, y + windowHeight);
+            ctx.moveTo(x, y + windowHeight / 2);
+            ctx.lineTo(x + windowWidth, y + windowHeight / 2);
+            ctx.stroke();
+          }
+        }
+
+        // door
+        const doorWidth = 60;
+        const doorHeight = 90;
+        const doorX = baseX + baseWidth / 2 - doorWidth / 2;
+        const doorY = baseY + baseHeight - doorHeight - 20;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(doorX, doorY, doorWidth, doorHeight);
+        ctx.strokeStyle = '#000000';
+        ctx.strokeRect(doorX, doorY, doorWidth, doorHeight);
+
+        ctx.fillStyle = '#5e5e68';
+        ctx.fillRect(doorX - 25, doorY - 12, doorWidth + 50, 12);
+      }
+
+      function drawTitle() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.font = '600 24px var(--font-heading, sans-serif)';
+        ctx.textAlign = 'left';
+        ctx.fillText('NTUT', 30, h - 20);
+      }
+
+      function render() {
+        drawBackground();
+        drawStars();
+        drawMoon();
+        drawBuilding();
+        drawTitle();
+      }
+
+      render();
+    })();
+  </script>
+
+</body>
+</html>

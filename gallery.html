@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - My Website</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <button class="nav-toggle" type="button" aria-label="切換主選單" aria-expanded="false" aria-controls="primary-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="primary-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="showcase.html">Showcase</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="canvas.html">Canvas</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Gallery</h1>
+    <section class="gallery-overlay-section">
+      <h2>Hover Overlay Effect</h2>
+
+      <div class="overlay-wrapper">
+        <img src="photo/gallery/cat_sleep.jpg" alt="午睡的校園貓" class="overlay-base">
+        <div class="overlay-layer">
+          <img src="photo/gallery/cat_leave.jpg" alt="起身伸懶腰的貓" class="overlay-image">
+          <div class="overlay-caption">醒來伸懶腰，準備巡邏</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="image-map-section">
+      <h2>Image Map</h2>
+      <div class="image-map-wrapper">
+        <img src="photo/gallery/cat.jpg" alt="躺在校園草地上的花貓" usemap="#cks-map" width="700" height="525">
+        <map name="cks-map">
+          <area shape="poly" coords="314,135,328,461,161,466,160,140" href="showcase.html" alt="點擊查看 Showcase" aria-label="點擊查看 Showcase">
+        </map>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

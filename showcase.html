@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Showcase - My Website</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <button class="nav-toggle" type="button" aria-label="切換主選單" aria-expanded="false" aria-controls="primary-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="primary-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="showcase.html" class="active">Showcase</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="canvas.html">Canvas</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Showcase</h1>
+    <!-- <p>My recent projects and work.</p> -->
+
+    <section class="featured-gallery card">
+      <h2>Polaroid Image Switcher</h2>
+
+      <div class="slider-frame">
+        <img id="showcase-photo" src="photo/showcase/1.jpg" alt="今日拍攝照片" class="slider-image">
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-button" id="showcase-prev">&lsaquo; Prev</button>
+        <span class="slider-counter" id="showcase-counter">Image 1 of 5</span>
+        <button class="slider-button" id="showcase-next">Next &rsaquo;</button>
+      </div>
+    </section>
+
+    <section class="featured-gallery card">
+      <h2>Table Styler</h2>
+
+      <div class="table-wrapper">
+        <table id="scoreTable" class="score-table">
+          <thead>
+            <tr>
+              <th>Math</th>
+              <th>English</th>
+              <th>Programming</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>90</td>
+              <td>60</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>80</td>
+              <td>86</td>
+              <td>98</td>
+            </tr>
+            <tr>
+              <td>75</td>
+              <td>92</td>
+              <td>88</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="score-controls">
+        <div class="control-row" data-action="width">
+          <span>Change The Table Width</span>
+          <button class="option-button" data-width="200">200px</button>
+          <button class="option-button" data-width="500">500px</button>
+        </div>
+
+        <div class="control-row" data-action="spacing">
+          <span>Change The Border and Spacing Width</span>
+          <button class="option-button" data-border="1">1px</button>
+          <button class="option-button" data-border="10">10px</button>
+          <button class="option-button" data-border="20">20px</button>
+        </div>
+
+        <div class="control-row" data-action="color">
+          <span>Change The Table Color</span>
+          <div class="color-swatch" data-color="#d8f3dc" style="background:#d8f3dc;"></div>
+          <div class="color-swatch" data-color="#d0ebff" style="background:#d0ebff;"></div>
+          <div class="color-swatch" data-color="#d8caff" style="background:#d8caff;"></div>
+          <div class="color-swatch" data-color="#f4dfba" style="background:#f4dfba;"></div>
+        </div>
+
+        <button class="reset-button" id="resetTable">Reset</button>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
